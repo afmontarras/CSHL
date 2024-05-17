@@ -1,25 +1,42 @@
 # CSHL
-
+Python material for the Cold Spring Harbor Laboratory Ion Channel and Neural Circuits Summer School. 
 ## Installation
+### Clone git repo to your computer
+- You can use the desktop git : https://desktop.github.com/
+- Or use the command line : 
+```
+cd <path where you want to store the CSHL folder>
+git clone https://github.com/afmontarras/CSHL.git
+```
+
 ### Environment Manager
 If not already you need to install either:
 - Anaconda/Miniconda: https://docs.anaconda.com/free/anaconda/install/index.html
-- Mamba/Miniforge: https://github.com/conda-forge/miniforge (https://mamba.readthedocs.io/en/latest/index.html)
+- Miniforge/mamba: https://github.com/conda-forge/miniforge (https://mamba.readthedocs.io/en/latest/index.html)
+
 ### Create your CSHL environment
-You can use either `conda` or `mamba` commands.  
-Write in your terminal:
+ Write in your terminal:
 ```
 cd <path to CSHL directory>
-conda env create -n ENVNAME --file CSHL.yml
+conda update -n base -c conda-forge conda
+conda env create --name CSHL --file CSHL.yml
 ```
-### Activate the CSHL env and launch jupyter lab
+This will create a CSHL python environment based on the CSHL.yml file present in the CSHL folder. It contains every package you need to start working with th notebooks. You need to activate the environment to work with it: `conda activate CSHL`.
+
+### Launch jupyter lab
 ```
 conda activate CSHL
 jupyter lab
 ```
-### Add aditional packages.
-- pyABF : https://swharden.com/pyabf/
+## Update actions : 
+### - CSHL git repo
 ```
-python -m pip install --upgrade pyabf
+cd <path to CSHL directory>
+git pull
 ```
-- Stimfit: https://github.com/neurodroid/stimfit/wiki/Stimfit / https://neurodroid.github.io/stimfit/stfio/index.html
+
+### - CSHL environment
+You need to be on the base environment (easiest way is to open a new terminal): 
+```
+conda env update --name CSHL --file CSHL.yml
+```

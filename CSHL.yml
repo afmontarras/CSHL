@@ -3,11 +3,16 @@ channels:
   - conda-forge
 dependencies:
   - jupyterlab
+  - matplotlib
   - scipy
+  - pandas
+  - tqdm
   - ca-certificates
   - certifi
   - openssl
   - nptdms
-  - matplotlib
   - ipympl
   - spyder
+  - pip
+  - pip:
+    - pyabf

@@ -8,7 +8,8 @@ Python material for the Cold Spring Harbor Laboratory Ion Channel and Neural Cir
 cd <path where you want to store the CSHL folder>
 git clone https://github.com/afmontarras/CSHL.git
 ```
-
+### Copy the folder (create your playground)
+During the course, the reference notebooks will be updated daily following your progress. You will want to create/modify them yourself day by day. So copy the cloned folder so that your own changes will not be affected by updating (pull) the git.
 ### Environment Manager
 If not already you need to install either:
 - Anaconda/Miniconda: https://docs.anaconda.com/free/anaconda/install/index.html

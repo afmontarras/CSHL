@@ -3,7 +3,7 @@ import pyabf
 import matplotlib.pyplot as plt
 
 def plot_swps(file,legend=False):
-    rec = pyabf.ABF(f)
+    rec = pyabf.ABF(file)
     fig,ax = plt.subplots(2,sharex=True)
     for swpNB in rec.sweepList:
         rec.setSweep(swpNB)

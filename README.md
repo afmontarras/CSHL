@@ -11,8 +11,7 @@ git clone https://github.com/afmontarras/CSHL.git
 ### Copy the folder (create your playground)
 During the course, the reference notebooks will be updated daily following your progress. You will want to create/modify them yourself day by day. So copy the cloned folder so that your own changes will not be affected by updating (pull) the git.
 ### Environment Manager
-If not already you need to install either:
-- Anaconda/Miniconda: https://docs.anaconda.com/free/anaconda/install/index.html
+You need to install either:
 - Miniforge/mamba: https://github.com/conda-forge/miniforge (https://mamba.readthedocs.io/en/latest/index.html)
 
 ### Create your CSHL environment

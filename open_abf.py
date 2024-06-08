@@ -28,3 +28,7 @@ def get_sweeps(f):
     dt = swp_time[1] 
     return swps, swp_time, 1/dt
 
+def swp_window(swps,start,end,sr,channel=0):
+    i_start = int(start * sr)
+    i_end = int(end * sr)
+    return swps[:,channel,i_start:i_end]

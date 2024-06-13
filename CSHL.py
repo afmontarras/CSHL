@@ -15,3 +15,39 @@ def IV_style(ax,
     ax.set_xticks(xticks)
     ax.set_yticks(yticks)
 
+def spike_detect(volt, v_dt, dur,
+                 thr=-10, inf_bnd=3, sup_bnd=500,
+                 ref_t=1e-3, sigma=1e-3):
+    deriv = np.diff(volt)
+    is_spk = (deriv[:-1]<2) * (deriv[1:]>=2)
+    spikes = np.where(is_spk)[0]
+    refact = int(ref_t/v_dt)
+    ref = 0
+    sspk = []
+    for st in spikes:
+        if st<ref:
+            continue
+        else:
+            spk = volt[st:st+refact]
+        if spk.max() < thr:
+            continue
+        else:
+            sspk.append(st)
+            ref = st+refact
+    sspk = np.array(sspk)
+    stimes = sspk*v_dt
+    isi = np.diff(stimes)
+    inst_frq = 1/isi
+    smth_frq = smooth(stimes[1:], sigma, inst_frq)
+    out_frq = (inf_bnd>smth_frq) | (smth_frq>sup_bnd)
+    if np.any(out_frq):
+        stop = np.where(out_frq)[0][0] - 1
+        dur = (sspk[stop]+refact)*v_dt
+        sspk = sspk[:stop]
+        stimes = sspk*v_dt
+        isi = np.diff(stimes)
+        inst_frq = 1/isi
+    is_spk = np.zeros(int(dur/v_dt))
+    is_spk[sspk]=True
+    return [sspk,stimes], inst_frq, is_spk, dur
+

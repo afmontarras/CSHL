@@ -30,7 +30,6 @@ def plot_swps(file,legend=False):
     ax[1].set_xlabel(rec.sweepLabelX)
     ax[0].set_ylabel(rec.sweepLabelY)
     ax[1].set_ylabel(rec.sweepLabelC)
-    ax[0].spines['bottom'].set_visible(False)
     # ax[0].set_xticks([])
     for i in range(2):
         ax[i].spines['right'].set_visible(False)

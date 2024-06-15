@@ -21,7 +21,7 @@ def plot_swps(file,legend=False):
     rec = pyabf.ABF(file)
     prt = rec.protocol
     fig,ax = plt.subplots(2,sharex=True)
-    ax[0].set_title(prt)
+    ax[0].set_title(prt+' ('+ file.split('/')[-1]+')')
     for swpNB in rec.sweepList:
         rec.setSweep(swpNB)
         ax[0].plot(rec.sweepX,rec.sweepY)
@@ -37,6 +37,7 @@ def plot_swps(file,legend=False):
     if legend:
         ax[1].legend(loc="right")
     fig.tight_layout()
+    plt.show()
 
 def get_sweeps(f):
     rec = pyabf.ABF(f)

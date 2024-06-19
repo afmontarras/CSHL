@@ -1,21 +1,21 @@
 import numpy as np
 import sys
 
-import filter
+import filtering
 
 def find_peaks(data, dt, threshold, mode='epsc', f_lo=0.001, f_hi=0.02):
     
-    databp = filter.bandpass(data, dt, f_lo, f_hi)
-    if mode is 'epsc':
+    databp = filtering.bandpass(data, dt, f_lo, f_hi)
+    if mode == 'epsc':
         crossings_start = np.where(
-            np.diff((databp < threshold).astype(np.float)) == 1)[0]
+            np.diff(databp < threshold) == 1)[0]
         crossings_end = np.where(
-            np.diff((databp < threshold).astype(np.float)) == -1)[0]
+            np.diff(databp < threshold) == -1)[0]
     else:
         crossings_start = np.where(
-            np.diff((databp > threshold).astype(np.float)) == 1)[0]
+            np.diff(databp > threshold) == 1)[0]
         crossings_end = np.where(
-            np.diff((databp > threshold).astype(np.float)) == -1)[0]
+            np.diff(databp > threshold) == -1)[0]
 
 
     if not len(crossings_start) or not len(crossings_end):
@@ -32,7 +32,7 @@ def find_peaks(data, dt, threshold, mode='epsc', f_lo=0.001, f_hi=0.02):
         crossings_end = crossings_end[:-1]
 
     ioffset = 20 # account for delay of butterworth filter
-    if mode is 'epsc':
+    if mode == 'epsc':
         return np.array([
             np.argmin(data[start-ioffset:end]) + start-ioffset
             for start, end in zip(crossings_start, crossings_end)])

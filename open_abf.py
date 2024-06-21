@@ -1,6 +1,7 @@
 import numpy as np
 import pyabf
 import matplotlib.pyplot as plt
+import matplotlib as mp
 
 def get_protocol(files):
     protocols = []
@@ -17,15 +18,17 @@ def files_from_protocol(prt_name,files):
             prt_file.append(files[i])
     return prt_file
 
-def plot_swps(file,legend=False):
+def plot_swps(file,legend=False,
+              cmap = mp.colormaps['viridis']):
     rec = pyabf.ABF(file)
     prt = rec.protocol
     fig,ax = plt.subplots(2,sharex=True)
     ax[0].set_title(prt+' ('+ file.split('/')[-1]+')')
-    for swpNB in rec.sweepList:
+    for i,swpNB in enumerate(rec.sweepList):
         rec.setSweep(swpNB)
-        ax[0].plot(rec.sweepX,rec.sweepY)
-        ax[1].plot(rec.sweepX,rec.sweepC,label=f"sweep:{swpNB}")
+        color = cmap(i/len(rec.sweepList))[:-1]
+        ax[0].plot(rec.sweepX,rec.sweepY,color=color)
+        ax[1].plot(rec.sweepX,rec.sweepC,label=f"sweep:{swpNB}",color=color)
     # labels and legends
     ax[1].set_xlabel(rec.sweepLabelX)
     ax[0].set_ylabel(rec.sweepLabelY)
